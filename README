@@ -1,0 +1,43 @@
+一，功能
+
+（1），用户注册、登录 
+（2），图书类别管理  查询、新增，删除
+（3），图书信息管理  查询，新增，修改，删除 
+（4），退出
+
+
+
+CREATE TABLE `t_user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `userName` varchar(64) NOT NULL COMMENT '用户名',
+  `password` varchar(64) NOT NULL COMMENT '密码',
+  `isdelete` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0：未删除 1：删除',
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modifyDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `t_booktype` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `bookTpyeName` varchar(20) NOT NULL COMMENT '图书类别',
+  `bookTpyeDesc` varchar(256) DEFAULT NULL COMMENT '图书类别描述',
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modifyDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `t_book` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `bookName` varchar(20) NOT NULL COMMENT '图书名称',
+  `author` varchar(20) DEFAULT NULL COMMENT '作者',
+  `sex` varchar(10) NOT NULL COMMENT '性别',
+  `price` bigint(20) DEFAULT NULL COMMENT '价格',
+  `bookTypeId` int(20) DEFAULT NULL COMMENT '图书类别id',
+  `bookDesc` varchar(256) DEFAULT NULL COMMENT '图书描述',
+  `isdelete` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0：未删除 1：删除',
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modifyDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

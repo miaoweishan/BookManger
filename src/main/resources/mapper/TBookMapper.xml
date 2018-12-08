@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.TBookMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.dao.TBook" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bookName" property="bookname" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="BIGINT" />
+    <result column="bookTypeId" property="booktypeid" jdbcType="INTEGER" />
+    <result column="bookDesc" property="bookdesc" jdbcType="VARCHAR" />
+    <result column="isdelete" property="isdelete" jdbcType="BIT" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+    
+    <association property="tbooktype" resultMap="com.example.demo.mapper.TBooktypeMapper.BaseResultMap">
+    
+    </association>
+  </resultMap>
+  
+  <!-- 新增图书 -->
+  <insert id="insertbook">
+  		INSERT INTO t_book 
+  		(bookName,author,sex,price,bookTypeId,bookDesc) 
+  		VALUES(#{arg0},#{arg1},#{arg2},#{arg3},#{arg4},#{arg5});
+  </insert>
+  
+  <!-- 修改图书信息 -->
+  <update id="updatebook">
+  		UPDATE t_book 
+  		SET 
+  		<if test="arg1!=null and arg1!=''">
+  			bookName=#{arg1}
+  		</if>
+  		<if test="arg2!=null and arg2!=''">
+  			,author=#{arg2}
+  		</if>
+  		<if test="arg3!=null and arg3!=''">
+  			,sex=#{arg3}
+  		</if>
+  		<if test="arg4!=null and arg4!=''">
+  			,price=#{arg4}
+  		</if>
+  		<if test="arg5!=null and arg5!=''">
+  			,bookTypeId=#{arg5}
+  		</if>
+  		<if test="arg6!=null and arg6!=''">
+  			,bookDesc=#{arg6}
+  		</if>		 
+  		where bookName=#{arg0};
+  </update>
+  
+  <!-- 逻辑删除图书 -->
+  <update id="deletebook">
+  		UPDATE t_book 
+  		SET isdelete=1 
+  		where bookName=#{bookname};
+  </update>
+  
+  <!-- 查询图书信息 -->
+  <select id="selectbook" resultMap="BaseResultMap">
+  		select tb.bookName,tb.author,tb.sex,tb.price,tb.bookDesc,tbt.bookTpyeName,tb.bookTypeId 
+  		from t_book tb LEFT JOIN t_booktype tbt ON tb.bookTypeId=tbt.id 
+  		where tb.bookName=#{arg0} and tb.isdelete=0
+  </select>
+</mapper>

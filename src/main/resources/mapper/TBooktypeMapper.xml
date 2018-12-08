@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.TBooktypeMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.dao.TBooktype" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bookTpyeName" property="booktpyename" jdbcType="VARCHAR" />
+    <result column="bookTpyeDesc" property="booktpyedesc" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <!-- 查询图书类别 -->
+  <select id="selectbooktype" resultMap="BaseResultMap">
+  		select id,bookTpyeName,bookTpyeDesc,createDate,modifyDate 
+  		from t_booktype
+  </select>
+  
+  <!-- 查询图书类别 -->
+  <select id="selectbooktypebybtname" resultMap="BaseResultMap">
+  		select id,bookTpyeName,bookTpyeDesc,createDate,modifyDate 
+  		from t_booktype
+  		where bookTpyeName=#{booktpyename}
+  </select>
+  
+  <!-- 插入图书类别 -->
+  <insert id="insertbooktype">
+  		insert INTO t_booktype (bookTpyeName
+  		<if test="arg1!=null and arg1!=''">
+    		,bookTpyeDesc		
+  		</if>
+  		 )
+  		VALUES(#{arg0}
+  		<if test="arg1!=null and arg1!=''">
+  			,#{arg1}
+  		</if>
+  		)
+  </insert>
+  
+  <!-- 删除图书类别 -->
+  <delete id="deletebooktype">
+  		DELETE FROM t_booktype 
+  		where bookTpyeName=#{booktpyename};
+  </delete>
+</mapper>

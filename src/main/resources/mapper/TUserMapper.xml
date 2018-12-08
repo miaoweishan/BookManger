@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.TUserMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.dao.TUser" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="isdelete" property="isdelete" jdbcType="BIT" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+   <!-- 多条件查询 -->
+   <select id="selectUser" resultMap="BaseResultMap">
+   		select id,userName,`password`,isdelete,createDate,modifyDate 
+   		from t_user 
+   		where userName=#{arg0} 
+   		<if test="arg1!=null and arg1!=''">
+   			and isdelete=#{arg1} 
+   		</if>
+   		<if test="arg2!=null and arg2!=''">
+   			and password=#{arg2}
+   		</if>
+   </select>
+   
+   <!-- 插入数据 -->
+   <insert id="insertUser">
+   		INSERT into t_user 
+   		(userName,password) 
+   		VALUES(#{arg0},#{arg1});
+   </insert>
+   
+   <!-- 更新数据 -->
+   <update id="updateUser">
+      UPDATE t_user 
+	  SET 
+	  <if test="arg2!=null and arg2!=''">
+	  	isdelete=#{arg2},
+	  </if>
+	  <if test="arg1!=null and arg1!=''">
+	  	`password`=#{arg1}
+	  </if>   
+	  where userName=#{arg0}
+   </update>
+
+</mapper>
