@@ -42,8 +42,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.41</version>
-		</dependency>
+			</dependency>
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
@@ -90,8 +89,7 @@
 	    <dependency>
 	      <groupId>ch.qos.logback</groupId>
 	      <artifactId>logback-core</artifactId>
-	      <version>1.1.1</version>
-	    </dependency>
+	      </dependency>
 	    <!-- 实现 slf4j 接口并且整合 -->
 	    <dependency>
 	      <groupId>ch.qos.logback</groupId>
@@ -130,6 +128,20 @@
 		    <version>3.4</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.4</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.3.1</version>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
 		    <groupId>javax.servlet</groupId>
@@ -149,6 +161,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>

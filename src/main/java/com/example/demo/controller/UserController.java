@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -48,9 +48,9 @@ public class UserController {
 	
 	//登录
 	@GetMapping("userLogin")
-	public BookMangerResult<String> userLogin(
+	public BookMangerResult<String> userLogin(HttpServletRequest request,
 			@RequestParam String username,@RequestParam String password){
-		logger.error("入参username："+username+"    password："+password);
+		logger.info("入参username："+username+"    password："+password);
 		
 		if(StringUtils.isBlank(username)) {
 			return new BookMangerResult<>(false, "请输入用户名！");
@@ -59,7 +59,10 @@ public class UserController {
 		}
 		
 		try {
-			String um = bookmangerservice.selectUser(username, password);
+			String userid = bookmangerservice.selectUser(username, password);
+			HttpSession session = request.getSession();  
+			session.setAttribute("userid", userid); 
+			session.setMaxInactiveInterval(30); //设置session 5s过期
 			CookieUtils.setCookie("username", username, 1000);
 			
 			return new BookMangerResult<>(true, "登录成功");
@@ -70,6 +73,16 @@ public class UserController {
 		
 	}
 	
-	
+	//注销
+	@GetMapping("logout")
+	public BookMangerResult logOut(HttpServletRequest request) {
+		HttpSession session = request.getSession();//获取session 
+		if(session !=null) {
+			String user = (String) session.getAttribute("userid");
+			session.invalidate();  //关闭session
+		}
+		
+		return new BookMangerResult<>(true, "安全退出！");		
+	}
 
 }

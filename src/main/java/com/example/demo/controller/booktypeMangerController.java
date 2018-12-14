@@ -72,6 +72,5 @@ public class booktypeMangerController {
 			return new BookMangerResult<>(true,"图书类别删除失败！");
 		}
 	}
-	
-	
+		
 }

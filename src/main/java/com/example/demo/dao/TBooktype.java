@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import java.util.Date;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Table(name = "t_booktype")
@@ -27,12 +28,14 @@ public class TBooktype {
      * 创建时间
      */
     @Column(name = "createDate")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date createdate;
 
     /**
      * 修改时间
      */
     @Column(name = "modifyDate")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date modifydate;
 
     /**

@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService{
 				if(passwordinfo==null) {
 					throw new BookMangerException("密码错误，清重新输入！");
 				}else {
-					return passwordinfo.getUsername();
+					return passwordinfo.getId().toString();
 				}
 			}
 		}catch(BookMangerException e) {

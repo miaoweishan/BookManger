@@ -2,7 +2,10 @@ package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import tk.mybatis.spring.annotation.MapperScan;
 
@@ -16,4 +19,18 @@ public class SpringBootPractice1Application {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootPractice1Application.class, args);
 	}
+	
+
+    /**
+     * 设置匹配*.json后缀请求
+     * @param dispatcherServlet
+     * @return
+     */
+    @Bean
+    public ServletRegistrationBean servletRegistrationBean(DispatcherServlet dispatcherServlet) {
+        ServletRegistrationBean<DispatcherServlet> servletServletRegistrationBean = new ServletRegistrationBean<>(dispatcherServlet);
+        servletServletRegistrationBean.addUrlMappings("*.json");
+        return servletServletRegistrationBean;
+    }
+	 
 }
